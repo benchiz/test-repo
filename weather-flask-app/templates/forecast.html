@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогноз погоды на 7 дней</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .location-info {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .forecast-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .forecast-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: white;
+        }
+        .forecast-date {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        td {
+            padding: 5px;
+        }
+        td:first-child {
+            font-weight: bold;
+            color: #555;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Прогноз погоды на 7 дней</h1>
+    
+    <div class="location-info">
+        <strong>Координаты:</strong> {{ latitude }}, {{ longitude }}
+    </div>
+    
+    <div class="forecast-grid">
+        {% for day in forecast %}
+        <div class="forecast-card">
+            <div class="forecast-date">{{ day.date }}</div>
+            <table>
+                <tr>
+                    <td>Описание:</td>
+                    <td>{{ day.description }}</td>
+                </tr>
+                <tr>
+                    <td>Макс.:</td>
+                    <td>{{ day.temp_max }}°C</td>
+                </tr>
+                <tr>
+                    <td>Мин.:</td>
+                    <td>{{ day.temp_min }}°C</td>
+                </tr>
+                <tr>
+                    <td>Код:</td>
+                    <td>{{ day.weathercode }}</td>
+                </tr>
+            </table>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <a href="/" class="back-btn">← Назад к поиску</a>
+</body>
+</html>
