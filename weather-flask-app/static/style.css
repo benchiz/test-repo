@@ -1,0 +1,134 @@
+/* Общие стили для всех страниц */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Стили для index.html */
+body.index-page {
+    max-width: 600px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.city-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.city-btn {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Стили для weather.html */
+body.weather-page {
+    max-width: 600px;
+}
+
+.weather-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+/* Стили для forecast.html */
+body.forecast-page {
+    max-width: 900px;
+}
+
+h1 {
+    color: #333;
+}
+
+.location-info {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.forecast-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.forecast-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.forecast-date {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+td {
+    padding: 5px;
+}
+
+td:first-child {
+    font-weight: bold;
+    color: #555;
+}
+
+/* Общие стили для кнопок навигации */
+.back-btn {
+    display: inline-block;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.back-btn:hover {
+    text-decoration: underline;
+}
+
+/* Дополнительные стили из forecast.html */
+td:first-child {
+    font-weight: bold;
+    color: #555;
+}
