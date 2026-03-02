@@ -1,0 +1,35 @@
+name: Todo App CI
+
+on:
+  push:
+    paths:
+      - 'todo-app/**'  # Запускается только при изменениях в todo-app
+  pull_request:
+    paths:
+      - 'todo-app/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./todo-app 
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    
+    - name: Lint with flake8
+      run: |
+        flake8 app.py tests/
+    
+    - name: Run tests
+      run: python tests/todoapp_test.py
