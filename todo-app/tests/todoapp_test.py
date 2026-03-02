@@ -1,6 +1,5 @@
 import sys
 import os
-import pytest
 
 # Добавляем путь к корневой директории для импорта app
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
