@@ -33,10 +33,10 @@ def test_app_config():
 def test_tasks_structure():
     """Тест структуры задач"""
     from app import tasks
-    
+
     # Проверяем, что tasks - это список
     assert isinstance(tasks, list)
-    
+
     # Проверяем структуру первой задачи (если список не пуст)
     if tasks:
         first_task = tasks[0]
@@ -45,33 +45,33 @@ def test_tasks_structure():
         print("✓ Структура задач корректна")
     else:
         print("⚠ Список задач пуст")
-    
+
     return True
 
 
 def test_add_task_logic():
     """Тест логики добавления задачи"""
     from app import app, tasks
-    
+
     # Сохраняем копию исходных задач для восстановления
     original_tasks = tasks.copy()
-    
+
     with app.test_client() as client:
         initial_tasks_count = len(tasks)
-        
+
         # Добавляем задачу
         client.post('/add', data={'title': 'Тестовая задача'})
-        
+
         # Проверяем, что задача добавилась
         assert len(tasks) == initial_tasks_count + 1
         assert tasks[-1]['title'] == 'Тестовая задача'
         assert tasks[-1]['done'] is False
         assert 'created' in tasks[-1]
-    
+
     # Восстанавливаем исходное состояние
     tasks.clear()
     tasks.extend(original_tasks)
-    
+
     print("✓ Логика добавления задачи работает корректно")
     return True
 
@@ -79,10 +79,10 @@ def test_add_task_logic():
 def test_toggle_task_logic():
     """Тест логики переключения статуса задачи"""
     from app import app, tasks
-    
+
     # Сохраняем копию исходных задач для восстановления
     original_tasks = tasks.copy()
-    
+
     with app.test_client() as client:
         # Добавляем тестовую задачу
         test_task = {
@@ -93,17 +93,17 @@ def test_toggle_task_logic():
         }
         tasks.append(test_task)
         initial_status = test_task['done']
-        
+
         # Переключаем статус
         client.get('/toggle/999')
-        
+
         # Проверяем, что статус изменился
         assert test_task['done'] != initial_status
-    
+
     # Восстанавливаем исходное состояние
     tasks.clear()
     tasks.extend(original_tasks)
-    
+
     print("✓ Логика переключения статуса работает корректно")
     return True
 
@@ -111,10 +111,10 @@ def test_toggle_task_logic():
 def test_delete_task_logic():
     """Тест логики удаления задачи"""
     from app import app, tasks
-    
+
     # Сохраняем исходное состояние
     original_tasks = tasks.copy()
-    
+
     # Добавляем тестовую задачу
     test_task = {
         'id': 999,
@@ -123,28 +123,28 @@ def test_delete_task_logic():
         'created': '2024-01-01'
     }
     tasks.append(test_task)
-    
+
     with app.test_client() as client:
         # Проверяем, что задача добавилась
         assert len(tasks) == len(original_tasks) + 1
-        
+
         # Удаляем задачу через клиент
         client.get('/delete/999')
-        
+
         # Проверяем, что задача удалилась
         # Важно: перезагружаем модуль, чтобы получить актуальное состояние
         import importlib
         import app as app_module
         importlib.reload(app_module)
         from app import tasks as updated_tasks
-        
+
         assert len(updated_tasks) == len(original_tasks)
         assert not any(task['id'] == 999 for task in updated_tasks)
-    
+
     # Восстанавливаем исходное состояние
     tasks.clear()
     tasks.extend(original_tasks)
-    
+
     print("✓ Логика удаления задачи работает корректно")
     return True
 
