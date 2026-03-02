@@ -1,0 +1,35 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo List</title>
+    <style>
+        body { font-family: Arial; max-width: 600px; margin: 50px auto; }
+        .task { padding: 10px; margin: 5px 0; background: #f0f0f0; }
+        .done { text-decoration: line-through; color: #888; }
+        input[type="text"] { padding: 8px; width: 70%; }
+        button { padding: 8px 15px; background: #4CAF50; color: white; border: none; }
+        a { margin-left: 10px; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <h1>Todo List</h1>
+    
+    <form action="/add" method="post">
+        <input type="text" name="title" placeholder="Новая задача..." required>
+        <button type="submit">Добавить</button>
+    </form>
+    
+    <div>
+        {% for task in tasks %}
+        <div class="task">
+            <span class="{% if task.done %}done{% endif %}">
+                {{ task.title }} ({{ task.created }})
+            </span>
+            <a href="/toggle/{{ task.id }}">✓</a>
+            <a href="/delete/{{ task.id }}">✗</a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
